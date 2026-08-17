@@ -12,9 +12,10 @@ O objetivo é praticar conceitos importantes do ecossistema .NET, como orientaç
 
 - A primeira versão será mais simples, onde trabalharemos diretamente no terminal.
 
-"""
+""
 - v1 — CLI e Json
-"""
+
+""
 
 - v2 — Alterar o Json por PostgreSQL
 PostgreSQL
