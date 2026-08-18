@@ -13,7 +13,7 @@ using System.Reflection;
 [assembly: System.Reflection.AssemblyCompanyAttribute("TodoList.Cli")]
 [assembly: System.Reflection.AssemblyConfigurationAttribute("Debug")]
 [assembly: System.Reflection.AssemblyFileVersionAttribute("1.0.0.0")]
-[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+e5b32f80361e47136f0c97943df80c086f0b29e7")]
+[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+6131b12c5281d6569760ee592b7237582f9749cb")]
 [assembly: System.Reflection.AssemblyProductAttribute("TodoList.Cli")]
 [assembly: System.Reflection.AssemblyTitleAttribute("TodoList.Cli")]
 [assembly: System.Reflection.AssemblyVersionAttribute("1.0.0.0")]
