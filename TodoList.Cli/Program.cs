@@ -93,6 +93,26 @@ switch (command)
 
         break;
 
+    case "delete":
+        if (args.Length != 2 || !int.TryParse(args[1], out var deleteTaskId))
+        {
+            Console.WriteLine("Uso: delete <id>");
+            return;
+        }
+        try
+        {
+            await todoService.DeleteAsync(deleteTaskId);
+            Thread.Sleep(500); // Adiciona um pequeno atraso para simular o tempo de processamento
+            Console.WriteLine($"Tarefa #{deleteTaskId} deletada com sucesso.");
+        } catch (ArgumentException exception)
+        {
+            Console.WriteLine($"Erro: {exception.Message}");
+        } catch (InvalidOperationException exception)
+        {
+            Console.WriteLine($"Erro: {exception.Message}");
+        }
+        break;
+
     default:
         Console.WriteLine($"Comando desconhecido: {command}");
         ShowHelp();
@@ -108,4 +128,5 @@ static void ShowHelp()
     Console.WriteLine("  list          Lista as tarefas");
     Console.WriteLine("  complete <id> Marca uma tarefa como concluída");
     Console.WriteLine("  edit <id> <novo título>  Edita o título de uma tarefa existente");
+    Console.WriteLine("  delete <id>  Deleta uma tarefa existente");
 }

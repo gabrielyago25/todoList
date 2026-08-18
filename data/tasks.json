@@ -1,16 +1,1 @@
-[
-  {
-    "id": 1,
-    "titulo": "teste todolist funcional?",
-    "isCompleted": true,
-    "criadoEm": "0001-01-01T00:00:00+00:00",
-    "concluidoEm": "2026-08-18T00:08:36.1609673+00:00"
-  },
-  {
-    "id": 2,
-    "titulo": "teste edi\u00E7\u00E3o 2",
-    "isCompleted": false,
-    "criadoEm": "0001-01-01T00:00:00+00:00",
-    "concluidoEm": null
-  }
-]
+[]

@@ -82,6 +82,20 @@ public sealed class TodoService
 
         return tarefa;
     }
+
+    public async Task DeleteAsync (int id)
+    {
+        if (id <= 0)
+        {
+            throw new ArgumentOutOfRangeException(nameof(id), "O ID deve ser maior que zero.");
+        }
+
+        var remover = await _repository.DeleteAsync(id);
+        if (!remover)
+        {
+            throw new InvalidOperationException($"A tarefa de ID {id} não foi encontrada.");
+        }
+    }
     public Task<IReadOnlyList<TodoTask>> ListarAsync()
     {
         return _repository.GetAllAsync();
