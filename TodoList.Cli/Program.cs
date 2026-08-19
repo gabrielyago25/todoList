@@ -14,114 +14,137 @@ if (args.Length == 0)
 
 var command = args[0].ToLowerInvariant();
 
-switch (command)
+try
 {
-    case "add":
-        if (args.Length < 2)
+    switch (command)
+    {
+        case "add":
         {
-            Console.WriteLine("Informe o título da tarefa.");
-            Console.WriteLine("Uso: add <título>");
-            return;
+            if (args.Length < 2)
+            {
+                ShowError("Informe o título da tarefa.");
+                Console.WriteLine("Uso: add <título>");
+                return;
+            }
+
+            var title = string.Join(' ', args.Skip(1));
+            var createdTask =
+                await todoService.CriarTarefaAsync(title);
+
+            Console.WriteLine(
+                $"Tarefa #{createdTask.Id} criada: {createdTask.Titulo}");
+
+            break;
         }
 
-        var title = string.Join(' ', args.Skip(1));
-        var createdTask = await todoService.CriarTarefaAsync(title);
-
-        Console.WriteLine(
-            $"Tarefa #{createdTask.Id} criada: {createdTask.Titulo}");
-        break;
-
-    case "edit":
-        if (args.Length < 3 || !int.TryParse(args[1], out var editTarefaId))
+        case "edit":
         {
-            Console.WriteLine("Uso: edit <id> <novo título>");
-            return;
+            if (args.Length < 3 ||
+                !int.TryParse(args[1], out var taskId))
+            {
+                ShowError("Uso: edit <id> <novo título>");
+                return;
+            }
+
+            var newTitle = string.Join(' ', args.Skip(2));
+            var editedTask =
+                await todoService.EditarAsync(taskId, newTitle);
+
+            Console.WriteLine(
+                $"Tarefa #{editedTask.Id} editada: {editedTask.Titulo}");
+
+            break;
         }
 
-        var novoTitulo = string.Join(' ', args.Skip(2));
+        case "complete":
+        {
+            if (args.Length != 2 ||
+                !int.TryParse(args[1], out var taskId))
+            {
+                ShowError("Uso: complete <id>");
+                return;
+            }
 
-        try
-        {
-            var tarefaEditada = await todoService.EditarAsync(editTarefaId, novoTitulo);
-            Console.WriteLine($"Tarefa #{tarefaEditada.Id} editada: {tarefaEditada.Titulo}");
-        } catch (ArgumentException exception)
-        {
-            Console.WriteLine($"Erro: {exception.Message}");
-        } catch (InvalidOperationException exception)
-        {
-            Console.WriteLine($"Erro: {exception.Message}");
-        }
-
-        break;
-
-    case "complete":
-        if (args.Length != 2 ||
-            !int.TryParse(args[1], out var taskId))
-        {
-            Console.WriteLine("Uso: complete <id>");
-            return;
-        }
-
-        try
-        {
             var completedTask =
                 await todoService.CompletarAsync(taskId);
 
             Console.WriteLine(
                 $"Tarefa #{completedTask.Id} concluída: {completedTask.Titulo}");
-        }
-        catch (InvalidOperationException exception)
-        {
-            Console.WriteLine($"Erro: {exception.Message}");
-        }
-        break;
 
-    case "list":
-        var tasks = await todoService.ListarAsync();
-
-        if (tasks.Count == 0)
-        {
-            Console.WriteLine("Nenhuma tarefa cadastrada.");
-            return;
+            break;
         }
 
-        foreach (var task in tasks)
+        case "list":
         {
-            var status = task.IsCompleted ? "[x]" : "[ ]";
-            Console.WriteLine($"{task.Id} {status} {task.Titulo}");
+            var tasks = await todoService.ListarAsync();
+
+            if (tasks.Count == 0)
+            {
+                Console.WriteLine("Nenhuma tarefa cadastrada.");
+                return;
+            }
+
+            foreach (var task in tasks)
+            {
+                var status = task.IsCompleted ? "[x]" : "[ ]";
+                Console.WriteLine($"{task.Id} {status} {task.Titulo}");
+            }
+
+            break;
         }
 
-        break;
+        case "delete":
+        {
+            if (args.Length != 2 ||
+                !int.TryParse(args[1], out var taskId))
+            {
+                ShowError("Uso: delete <id>");
+                return;
+            }
 
-    case "delete":
-        if (args.Length != 2 || !int.TryParse(args[1], out var deleteTaskId))
-        {
-            Console.WriteLine("Uso: delete <id>");
-            return;
+            await todoService.DeletarAsync(taskId);
+            Console.WriteLine($"Tarefa #{taskId} excluída.");
+
+            break;
         }
-        try
-        {
-            await todoService.DeletarAsync(deleteTaskId);
-            Console.WriteLine($"Tarefa #{deleteTaskId} deletada com sucesso.");
-        } catch (ArgumentException exception)
-        {
-            Console.WriteLine($"Erro: {exception.Message}");
-        } catch (InvalidOperationException exception)
-        {
-            Console.WriteLine($"Erro: {exception.Message}");
-        }
-        break;
-    
-    case "help":
-    case "--help":
-    case "-h":
-        ShowHelp();
-        break;
-        
-    default:
-        Console.WriteLine($"Comando desconhecido: {command}");
-        ShowHelp();
-        break;
+
+        case "help":
+        case "--help":
+        case "-h":
+            ShowHelp();
+            break;
+
+        default:
+            ShowError($"Comando desconhecido: {command}");
+            ShowHelp();
+            break;
+    }
+}
+catch (ArgumentException exception)
+{
+    ShowError(exception.Message);
+}
+catch (InvalidOperationException exception)
+{
+    ShowError(exception.Message);
+}
+catch (InvalidDataException exception)
+{
+    ShowError(exception.Message);
+}
+catch (IOException exception)
+{
+    ShowError($"Não foi possível acessar os dados: {exception.Message}");
+}
+catch (UnauthorizedAccessException exception)
+{
+    ShowError($"Acesso negado aos dados: {exception.Message}");
+}
+
+static void ShowError(string message)
+{
+    Console.Error.WriteLine($"Erro: {message}");
+    Environment.ExitCode = 1;
 }
 
 static void ShowHelp()
@@ -129,10 +152,10 @@ static void ShowHelp()
     Console.WriteLine("TodoList CLI");
     Console.WriteLine();
     Console.WriteLine("Comandos:");
-    Console.WriteLine("  add <título>  Cria uma tarefa");
-    Console.WriteLine("  list          Lista as tarefas");
-    Console.WriteLine("  complete <id> Marca uma tarefa como concluída");
-    Console.WriteLine("  edit <id> <novo título>  Edita o título de uma tarefa existente");
-    Console.WriteLine("  delete <id>  Deleta uma tarefa existente");
-    Console.WriteLine("  help          Exibe esta ajuda");
+    Console.WriteLine("  add <título>             Cria uma tarefa");
+    Console.WriteLine("  list                     Lista as tarefas");
+    Console.WriteLine("  complete <id>            Conclui uma tarefa");
+    Console.WriteLine("  edit <id> <novo título>  Edita uma tarefa");
+    Console.WriteLine("  delete <id>              Exclui uma tarefa");
+    Console.WriteLine("  help                     Exibe esta ajuda");
 }
