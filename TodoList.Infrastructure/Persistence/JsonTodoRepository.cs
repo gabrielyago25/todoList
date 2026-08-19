@@ -1,7 +1,8 @@
 using System.Text.Json;
-using TodoList.Cli.Models;
+using TodoList.Core.Models;
+using TodoList.Core.Repositories;
 
-namespace TodoList.Cli.Repositories;
+namespace TodoList.Infrastructure.Persistence;
 
 public sealed class JsonTodoRepository : ITodoRepository
 {

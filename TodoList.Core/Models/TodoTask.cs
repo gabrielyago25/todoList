@@ -1,4 +1,4 @@
-namespace TodoList.Cli.Models;
+namespace TodoList.Core.Models;
 
 public sealed class TodoTask {
     public int Id {get; set;}

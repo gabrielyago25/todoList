@@ -13,3 +13,9 @@ C:\Users\gabri\todoList\TodoList.Cli\obj\Debug\net10.0\TodoList.Cli.pdb
 C:\Users\gabri\todoList\TodoList.Cli\obj\Debug\net10.0\TodoList.Cli.genruntimeconfig.cache
 C:\Users\gabri\todoList\TodoList.Cli\obj\Debug\net10.0\ref\TodoList.Cli.dll
 C:\Users\gabri\todoList\TodoList.Cli\obj\Debug\net10.0\TodoList.Cli.sourcelink.json
+C:\Users\gabri\todoList\TodoList.Cli\bin\Debug\net10.0\TodoList.Core.dll
+C:\Users\gabri\todoList\TodoList.Cli\bin\Debug\net10.0\TodoList.Infrastructure.dll
+C:\Users\gabri\todoList\TodoList.Cli\bin\Debug\net10.0\TodoList.Core.pdb
+C:\Users\gabri\todoList\TodoList.Cli\bin\Debug\net10.0\TodoList.Infrastructure.pdb
+C:\Users\gabri\todoList\TodoList.Cli\obj\Debug\net10.0\TodoList.Cli.csproj.AssemblyReference.cache
+C:\Users\gabri\todoList\TodoList.Cli\obj\Debug\net10.0\TodoList.DF0F537B.Up2Date

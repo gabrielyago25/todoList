@@ -1,3 +1,5 @@
 <Solution>
   <Project Path="TodoList.Cli/TodoList.Cli.csproj" />
+  <Project Path="TodoList.Core/TodoList.Core.csproj" />
+  <Project Path="TodoList.Infrastructure/TodoList.Infrastructure.csproj" />
 </Solution>

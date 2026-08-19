@@ -1,11 +1,49 @@
 {
   "version": 3,
   "targets": {
-    "net10.0": {}
+    "net10.0": {
+      "TodoList.Core/1.0.0": {
+        "type": "project",
+        "framework": ".NETCoreApp,Version=v10.0",
+        "compile": {
+          "bin/placeholder/TodoList.Core.dll": {}
+        },
+        "runtime": {
+          "bin/placeholder/TodoList.Core.dll": {}
+        }
+      },
+      "TodoList.Infrastructure/1.0.0": {
+        "type": "project",
+        "framework": ".NETCoreApp,Version=v10.0",
+        "dependencies": {
+          "TodoList.Core": "1.0.0"
+        },
+        "compile": {
+          "bin/placeholder/TodoList.Infrastructure.dll": {}
+        },
+        "runtime": {
+          "bin/placeholder/TodoList.Infrastructure.dll": {}
+        }
+      }
+    }
   },
-  "libraries": {},
+  "libraries": {
+    "TodoList.Core/1.0.0": {
+      "type": "project",
+      "path": "../TodoList.Core/TodoList.Core.csproj",
+      "msbuildProject": "../TodoList.Core/TodoList.Core.csproj"
+    },
+    "TodoList.Infrastructure/1.0.0": {
+      "type": "project",
+      "path": "../TodoList.Infrastructure/TodoList.Infrastructure.csproj",
+      "msbuildProject": "../TodoList.Infrastructure/TodoList.Infrastructure.csproj"
+    }
+  },
   "projectFileDependencyGroups": {
-    "net10.0": []
+    "net10.0": [
+      "TodoList.Core >= 1.0.0",
+      "TodoList.Infrastructure >= 1.0.0"
+    ]
   },
   "packageFolders": {
     "C:\\Users\\gabri\\.nuget\\packages\\": {}
@@ -31,7 +69,14 @@
       "frameworks": {
         "net10.0": {
           "targetAlias": "net10.0",
-          "projectReferences": {}
+          "projectReferences": {
+            "C:\\Users\\gabri\\todoList\\TodoList.Core\\TodoList.Core.csproj": {
+              "projectPath": "C:\\Users\\gabri\\todoList\\TodoList.Core\\TodoList.Core.csproj"
+            },
+            "C:\\Users\\gabri\\todoList\\TodoList.Infrastructure\\TodoList.Infrastructure.csproj": {
+              "projectPath": "C:\\Users\\gabri\\todoList\\TodoList.Infrastructure\\TodoList.Infrastructure.csproj"
+            }
+          }
         }
       },
       "warningProperties": {

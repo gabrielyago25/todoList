@@ -1,6 +1,6 @@
-using TodoList.Cli.Models;
+using TodoList.Core.Models;
 
-namespace TodoList.Cli.Repositories;
+namespace TodoList.Core.Repositories;
 
 public interface ITodoRepository
 {

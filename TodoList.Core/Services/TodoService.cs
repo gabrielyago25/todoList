@@ -1,7 +1,7 @@
-using TodoList.Cli.Models;
-using TodoList.Cli.Repositories;
+using TodoList.Core.Models;
+using TodoList.Core.Repositories;
 
-namespace TodoList.Cli.Services;
+namespace TodoList.Core.Services;
 
 public sealed class TodoService
 {

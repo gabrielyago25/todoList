@@ -7,14 +7,47 @@
   "targets": {
     ".NETCoreApp,Version=v10.0": {
       "TodoList.Cli/1.0.0": {
+        "dependencies": {
+          "TodoList.Core": "1.0.0",
+          "TodoList.Infrastructure": "1.0.0"
+        },
         "runtime": {
           "TodoList.Cli.dll": {}
+        }
+      },
+      "TodoList.Core/1.0.0": {
+        "runtime": {
+          "TodoList.Core.dll": {
+            "assemblyVersion": "1.0.0.0",
+            "fileVersion": "1.0.0.0"
+          }
+        }
+      },
+      "TodoList.Infrastructure/1.0.0": {
+        "dependencies": {
+          "TodoList.Core": "1.0.0"
+        },
+        "runtime": {
+          "TodoList.Infrastructure.dll": {
+            "assemblyVersion": "1.0.0.0",
+            "fileVersion": "1.0.0.0"
+          }
         }
       }
     }
   },
   "libraries": {
     "TodoList.Cli/1.0.0": {
+      "type": "project",
+      "serviceable": false,
+      "sha512": ""
+    },
+    "TodoList.Core/1.0.0": {
+      "type": "project",
+      "serviceable": false,
+      "sha512": ""
+    },
+    "TodoList.Infrastructure/1.0.0": {
       "type": "project",
       "serviceable": false,
       "sha512": ""
