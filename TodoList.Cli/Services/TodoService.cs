@@ -90,8 +90,8 @@ public sealed class TodoService
             throw new ArgumentOutOfRangeException(nameof(id), "O ID deve ser maior que zero.");
         }
 
-        var remover = await _repository.DeleteAsync(id);
-        if (!remover)
+        var foiRemovida = await _repository.DeleteAsync(id);
+        if (!foiRemovida)
         {
             throw new InvalidOperationException($"A tarefa de ID {id} não foi encontrada.");
         }
