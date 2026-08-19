@@ -83,7 +83,7 @@ public sealed class TodoService
         return tarefa;
     }
 
-    public async Task DeleteAsync (int id)
+    public async Task DeletarAsync (int id)
     {
         if (id <= 0)
         {
